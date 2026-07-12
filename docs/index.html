@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>document.documentElement.classList.add('js');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kishan Patel | Senior DevSecOps & Platform Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0f1a;
+            --bg-card: #161d2b;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: #2d3748; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-blue); }
+
+        /* Layout */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        /* Fade-in is a JS-only enhancement: sections stay visible without JS
+           (crawlers, link previews, print, no-JS browsers must see content). */
+        html.js section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        html.js section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html.js section {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 15, 26, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.2rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            background: linear-gradient(to right, var(--accent-blue), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.1), transparent),
+                        radial-gradient(circle at bottom left, rgba(6, 182, 212, 0.1), transparent);
+            padding-top: 60px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero-content .highlight {
+            background: linear-gradient(to right, var(--accent-blue), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Section Headers */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-blue);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .skill-category:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            margin-bottom: 1.5rem;
+            color: var(--accent-cyan);
+            font-size: 1.2rem;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .tag {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-blue);
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -6px;
+            top: 5px;
+            width: 14px;
+            height: 14px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+        }
+
+        .exp-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .exp-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .exp-company {
+            color: var(--accent-cyan);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .exp-date {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .exp-list {
+            list-style: none;
+            color: var(--text-muted);
+        }
+
+        .exp-list li {
+            margin-bottom: 0.7rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .exp-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-info {
+            padding: 2rem;
+            flex-grow: 1;
+        }
+
+        .project-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .project-info p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            color: var(--text-muted);
+        }
+
+        /* Certs & Education */
+        .edu-certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+        }
+
+        .cert-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .cert-icon {
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        .contact-card {
+            background: linear-gradient(135deg, var(--bg-card), #1c2538);
+            padding: 4rem 2rem;
+            border-radius: 24px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2.5rem;
+        }
+
+        .contact-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .contact-link:hover {
+            color: var(--accent-blue);
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero { height: auto; padding: 140px 0 80px; }
+            .edu-certs-grid { grid-template-columns: 1fr; }
+            .timeline::before { left: 10px; }
+            .timeline-item { padding-left: 30px; }
+            .timeline-dot { left: 4px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-content">
+            <a href="#" class="logo">Kishan Patel</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero visible">
+        <div class="container hero-content">
+            <h1>Senior <span class="highlight">DevSecOps</span> & <br>Platform Engineer</h1>
+            <p>Building secure, production-grade cloud infrastructure and AI decision systems. Specialist in hardened Kubernetes (EKS) GovCloud, GitOps, and LLM-assisted orchestration.</p>
+            <div class="cta-group">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="https://linkedin.com/in/kishanpatel-MIS" target="_blank" class="btn btn-secondary">LinkedIn Profile</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="exp-card" style="max-width: 800px; margin: 0 auto;">
+            <p style="font-size: 1.1rem; color: var(--text-muted);">
+                I bring 6+ years of experience architecting the platforms that power modern data and AI systems. My focus lies at the intersection of security and scalability, owning the full platform lifecycle—from hardened Kubernetes clusters in AWS GovCloud under FedRAMP/NIST 800-53 to implementing advanced policy-as-code security gates. 
+                <br><br>
+                Beyond traditional infrastructure, I build AI decision systems, developing agent orchestration, closed-loop evaluation harnesses, and multi-agent frameworks on a robust DevSecOps foundation.
+            </p>
+        </div>
+    </section>
+
+    <section id="skills" class="container">
+        <h2 class="section-title">Technical Expertise</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Cloud & Governance</h3>
+                <div class="tag-container">
+                    <span class="tag">AWS (EKS, EC2, S3, IAM, Lambda, Glue, Redshift)</span>
+                    <span class="tag">AWS GovCloud</span>
+                    <span class="tag">FedRAMP (IL4/IL5)</span>
+                    <span class="tag">NIST 800-53</span>
+                    <span class="tag">FIPS 140-2</span>
+                    <span class="tag">Google Cloud (GKE, BigQuery, Pub/Sub)</span>
+                    <span class="tag">Azure (Synapse, Databricks)</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Kubernetes & Platform</h3>
+                <div class="tag-container">
+                    <span class="tag">Amazon EKS</span>
+                    <span class="tag">Helm</span>
+                    <span class="tag">ArgoCD</span>
+                    <span class="tag">Flux (GitOps)</span>
+                    <span class="tag">Karpenter</span>
+                    <span class="tag">Istio</span>
+                    <span class="tag">Linkerd</span>
+                    <span class="tag">Calico</span>
+                    <span class="tag">OPA Gatekeeper</span>
+                    <span class="tag">Keycloak</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>IaC & CI/CD</h3>
+                <div class="tag-container">
+                    <span class="tag">Terraform</span>
+                    <span class="tag">CloudFormation</span>
+                    <span class="tag">Ansible</span>
+                    <span class="tag">GitLab CI</span>
+                    <span class="tag">Jenkins</span>
+                    <span class="tag">SAST</span>
+                    <span class="tag">SonarQube</span>
+                    <span class="tag">Zero-Trust Networking</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>AI & LLM Engineering</h3>
+                <div class="tag-container">
+                    <span class="tag">Multi-agent Orchestration</span>
+                    <span class="tag">Agent Guardrails</span>
+                    <span class="tag">RAG Systems</span>
+                    <span class="tag">LLM-judge Eval</span>
+                    <span class="tag">Claude Code</span>
+                    <span class="tag">Ollama</span>
+                    <span class="tag">Memory Systems</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Data & Observability</h3>
+                <div class="tag-container">
+                    <span class="tag">Spark / PySpark</span>
+                    <span class="tag">Kafka</span>
+                    <span class="tag">Airflow / Dagster</span>
+                    <span class="tag">Prometheus</span>
+                    <span class="tag">Grafana (Tempo, Loki, Alloy)</span>
+                    <span class="tag">SQL / dbt</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Languages & Core</h3>
+                <div class="tag-container">
+                    <span class="tag">Python</span>
+                    <span class="tag">Bash</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">TypeScript/JS</span>
+                    <span class="tag">TCP/IP</span>
+                    <span class="tag">SSL/TLS</span>
+                    <span class="tag">TDD</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="container">
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="timeline">
+            <!-- Rackner -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div>
+                            <span class="exp-company">Rackner Solutions</span>
+                            <span class="exp-title">Senior DevSecOps Engineer</span>
+                        </div>
+                        <span class="exp-date">Nov 2021 — Present</span>
+                    </div>
+                    <ul class="exp-list">
+                        <li>Built and owns entire Kubernetes backend and DevOps platform for media team in AWS GovCloud under FedRAMP, IL4/IL5, NIST 800-53.</li>
+                        <li>Architected 4 production EKS clusters with FIPS 140-2 encryption, zero-trust networking (Istio/Linkerd), Calico, and OPA Gatekeeper.</li>
+                        <li>Designed AI decision-advantage service for AFRL with fail-closed LLM validation (876 tests).</li>
+                        <li>Built human-machine-teaming command console (FastAPI, PostgreSQL, React/SolidJS) with doctrine-gated decisions (512 tests).</li>
+                        <li>Automated EKS lifecycle with Terraform + Karpenter, reducing compute spend by ~30%.</li>
+                        <li>Implemented GitOps delivery (ArgoCD/Flux) across 25 namespaces and 18 services.</li>
+                        <li>Integrated security gates in CI/CD including SAST, secret detection, and SonarQube.</li>
+                        <li>Established comprehensive observability stack using Prometheus, Grafana, Tempo, Loki, and Alloy.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Accenture -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div>
+                            <span class="exp-company">Accenture</span>
+                            <span class="exp-title">Cloud Data Engineer and Architect</span>
+                        </div>
+                        <span class="exp-date">May 2020 — Nov 2021</span>
+                    </div>
+                    <ul class="exp-list">
+                        <li>Architected critical cloud migration to Azure Synapse and Databricks.</li>
+                        <li>Optimized Hadoop performance by 10x, resulting in approximate annual savings of $100K.</li>
+                        <li>Developed robust GitLab CI/CD pipelines and ETL workflows using Dataproc and Composer.</li>
+                        <li>Created advanced Looker dashboards for business intelligence.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Cigna -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div>
+                            <span class="exp-company">Cigna</span>
+                            <span class="exp-title">Big Data Engineer</span>
+                        </div>
+                        <span class="exp-date">Jun 2019 — May 2020</span>
+                    </div>
+                    <ul class="exp-list">
+                        <li>Led Hadoop application solutions and large-scale ETL optimization.</li>
+                        <li>Applied TDD (Test Driven Development) for all production-grade solutions.</li>
+                        <li>Implemented Docker images for automated reporting systems.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Levo -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div>
+                            <span class="exp-company">Levo International</span>
+                            <span class="exp-title">Data Engineer</span>
+                        </div>
+                        <span class="exp-date">Jan 2018 — Jun 2019</span>
+                    </div>
+                    <ul class="exp-list">
+                        <li>Architected full AWS data architecture for an international hydroponics business.</li>
+                        <li>Developed ETL pipelines with Redshift/MySQL and generated actionable Tableau dashboards.</li>
+                        <li>Built custom JavaScript web interfaces and optimized SQL views for data analytics.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <h2 class="section-title">Key Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-info">
+                    <h3>FleetAI</h3>
+                    <p>AI Business Operations Platform featuring multi-agent orchestration and automated browser-based task execution.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Claude</span>
+                        <span class="tech-tag">Playwright</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Telegram</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-info">
+                    <h3>PSA/DASH</h3>
+                    <p>Decision-Advantage Platform for AFRL battle management. High-reliability system with 2,250+ tests.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">Dagster</span>
+                        <span class="tech-tag">Ollama</span>
+                        <span class="tech-tag">React/SolidJS</span>
+                        <span class="tech-tag">Docker</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-info">
+                    <h3>Jig</h3>
+                    <p>GitOps Engine for Repository Governance. Powerful CLI and Web UI for managing massive repo fleets (~10.8k lines of code).</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Go</span>
+                        <span class="tech-tag">GitHub API</span>
+                        <span class="tech-tag">YAML</span>
+                        <span class="tech-tag">CLI</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-info">
+                    <h3>Stock-Engine</h3>
+                    <p>Equity Inflection-Research Engine utilizing SEC EDGAR data and LLMs for investment insights.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">SEC EDGAR</span>
+                        <span class="tech-tag">LLM</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-info">
+                    <h3>Algo Trading Systems</h3>
+                    <p>Asynchronous trading bots across multiple financial markets with LLM-integrated sentiment analysis.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">async httpx</span>
+                        <span class="tech-tag">Alpaca</span>
+                        <span class="tech-tag">Polymarket</span>
+                        <span class="tech-tag">Kalshi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="container">
+        <h2 class="section-title">Education & Certifications</h2>
+        <div class="edu-certs-grid">
+            <div>
+                <h3 style="margin-bottom: 1.5rem; color: var(--accent-cyan);">Education</h3>
+                <div class="cert-item">
+                    <span class="cert-icon">🎓</span>
+                    <div>
+                        <strong>MS Business Analytics & Project Management</strong><br>
+                        <span style="color: var(--text-muted);">UConn, June 2020</span>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <span class="cert-icon">🎓</span>
+                    <div>
+                        <strong>BS Management Information Systems</strong><br>
+                        <span style="color: var(--text-muted);">UConn, May 2019 (Minor: Psychology)</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 1.5rem; color: var(--accent-cyan);">Certifications</h3>
+                <div class="cert-item">
+                    <span class="cert-icon">✓</span>
+                    <div>
+                        <strong>Certified Kubernetes Administrator (CKA)</strong><br>
+                        <span style="color: var(--text-muted);">Feb 2025</span>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <span class="cert-icon">✓</span>
+                    <div>
+                        <strong>Google Cloud Professional Data Engineer</strong><br>
+                        <span style="color: var(--text-muted);">Nov 2021</span>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <span class="cert-icon">✓</span>
+                    <div>
+                        <strong>SnowPro Core</strong><br>
+                        <span style="color: var(--text-muted);">Aug 2021</span>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <span class="cert-icon">✓</span>
+                    <div>
+                        <strong>AWS Certified Cloud Practitioner</strong><br>
+                        <span style="color: var(--text-muted);">June 2021</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container">
+        <div class="contact-card">
+            <h2 class="section-title">Get In Touch</h2>
+            <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem;">
+                I am open to freelance opportunities, consulting, or senior engineering roles. Let's build something secure and scalable together.
+            </p>
+            <div class="contact-links">
+                <a href="mailto:Kishanp415@Gmail.com" class="contact-link">
+                    <span>✉️</span> Kishanp415@Gmail.com
+                </a>
+                <a href="https://linkedin.com/in/kishanpatel-MIS" target="_blank" class="contact-link">
+                    <span>🔗</span> LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Kishan Patel. Built with precision and security.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth scrolling for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
